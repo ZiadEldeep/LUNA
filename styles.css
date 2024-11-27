@@ -1,0 +1,266 @@
+/* Global Styles */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #000; /* Dark background */
+    color: #fff; /* White text */
+    line-height: 1.6;
+  }
+  
+  /* Navbar */
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background: #111;
+  }
+  
+  .navbar .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #32cd32;
+  }
+  
+  .navbar .nav-links {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+  }
+  
+  .nav-links a {
+    text-decoration: none;
+    color: #aaa;
+  }
+  
+  .nav-links .login-btn {
+    color: #32cd32;
+    border: 1px solid #32cd32;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+  }
+  
+  /* Main Section */
+  .main-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem;
+    flex-wrap: wrap;
+  }
+  
+  .text-content {
+    max-width: 50%;
+  }
+  
+  .text-content h1 {
+    font-size: 3rem;
+    color: #fff;
+    margin-bottom: 1rem;
+  }
+  
+  .text-content p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+  }
+  
+  .cta-button {
+    padding: 0.8rem 1.5rem;
+    background-color: #32cd32;
+    color: #000;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+  
+  .image-content img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  /* Info Section */
+  .info-section {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    padding: 2rem;
+    text-align: center;
+    background-color: #111;
+  }
+  
+  .info-card {
+    max-width: 300px;
+  }
+  
+  .info-card .icon {
+    font-size: 3rem;
+    color: #32cd32;
+  }
+  
+  .info-card p {
+    margin-top: 1rem;
+  }
+  
+  /* General Styles */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #000; /* Dark background */
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  
+  /* Navigation Bar */
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: #111; /* Darker navbar */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+  }
+  
+  .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #32cd32; /* Green accent */
+  }
+  
+  .nav-links {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+  }
+  
+  .nav-links a {
+    color: #aaa; /* Light grey */
+    text-decoration: none;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+  }
+  
+  .nav-links a:hover {
+    color: #32cd32; /* Green on hover */
+  }
+  
+  /* Login Container */
+  .login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    padding: 2rem;
+  }
+  
+  .login-card {
+    background-color: #111; /* Dark card */
+    padding: 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
+    text-align: center;
+    width: 100%;
+    max-width: 450px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .login-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.8);
+  }
+  
+  .login-title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #fff;
+    margin-bottom: 1.5rem;
+  }
+  
+  /* Form Styles */
+  .login-form .form-group {
+    margin-bottom: 1.5rem;
+    text-align: left;
+  }
+  
+  .login-form label {
+    color: #ddd;
+    font-size: 0.9rem;
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+  
+  .login-form input {
+    width: 100%;
+    padding: 0.9rem;
+    border-radius: 8px;
+    border: 1px solid #333;
+    background-color: #222; /* Input background */
+    color: #fff; /* Input text */
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .login-form input::placeholder {
+    color: #666; /* Placeholder text */
+  }
+  
+  .login-form input:focus {
+    border-color: #32cd32; /* Green focus border */
+    box-shadow: 0 0 8px rgba(50, 205, 50, 0.8); /* Green glow */
+  }
+  
+  .cta-button {
+    width: 100%;
+    padding: 0.9rem 1.5rem;
+    background-color: #32cd32; /* Green button */
+    color: #000; /* Black text */
+    font-size: 1.1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  .cta-button:hover {
+    background-color: #28a428; /* Darker green on hover */
+    transform: translateY(-3px);
+  }
+  
+  .register-link {
+    margin-top: 1rem;
+    color: #ccc;
+    font-size: 0.9rem;
+  }
+  
+  .register-link a {
+    color: #32cd32;
+    font-weight: bold;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  
+  .register-link a:hover {
+    color: #28a428; /* Darker green on hover */
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .login-card {
+      padding: 2rem;
+    }
+  
+    .login-title {
+      font-size: 1.8rem;
+    }
+  
+    .cta-button {
+      font-size: 1rem;
+    }
+  }
+  

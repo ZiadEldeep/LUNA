@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - Secure Access</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="navbar">
+    <div class="logo">LUNA</div>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="#">Pricing</a></li>
+        <li><a href="#">Help</a></li>
+        <li><a href="register.html">Register</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="login-section">
+    <div class="login-container">
+      <h1>Welcome Back</h1>
+      <p>Log in to your account to continue</p>
+      <form id="login-form" class="login-form" action="#" method="POST">
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" placeholder="Enter your email" required>
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" placeholder="Enter your password" required>
+        </div>
+        <button type="submit" class="cta-button">Log In</button>
+      </form>
+      <p class="login-footer">
+        Don't have an account? <a href="register.html" class="link">Register here</a>.
+      </p>
+    </div>
+  </main>
+
+  <script>
+    // Add event listener for the login form
+    document.getElementById("login-form").addEventListener("submit", function(event) {
+      event.preventDefault(); // Prevent form from submitting normally
+
+      // Get the input values (email and password)
+      const enteredEmail = document.getElementById("email").value;
+      const enteredPassword = document.getElementById("password").value;
+
+      // Retrieve stored user data from localStorage
+      const storedUser = JSON.parse(localStorage.getItem("user"));
+
+      // Check if the user data exists in localStorage
+      if (storedUser) {
+        // Compare entered email and password with the stored ones
+        if (enteredEmail === storedUser.email && enteredPassword === storedUser.password) {
+          // If credentials match, show success (you can redirect to dashboard or homepage)
+          alert("Login successful!");
+          window.location.href = "index.html"; // Redirect to dashboard page (or any other page)
+        } else {
+          // If credentials do not match, show an error message
+          alert("Invalid email or password. Please try again.");
+        }
+      } else {
+        // If no user is found in localStorage
+        alert("No user found. Please register first.");
+      }
+    });
+  </script>
+
+  <script src="script.js"></script>
+</body>
+</html>

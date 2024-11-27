@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard</title>
+  <style>
+    /* General Styling */
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #111;
+      color: #fff;
+      display: flex;
+      height: 100vh;
+    }
+
+    .dashboard {
+      display: flex;
+      width: 100%;
+    }
+
+    /* Sidebar Styling */
+    .sidebar {
+      width: 250px;
+      background-color: #1a1a1a;
+      padding: 1rem;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: #32cd32;
+      margin-bottom: 2rem;
+    }
+
+    .nav-menu ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      padding: 0.8rem 1rem;
+      margin-bottom: 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .nav-item .icon {
+      margin-right: 1rem;
+    }
+
+    .nav-item:hover {
+      background-color: #222;
+    }
+
+    .nav-item.active {
+      background-color: #222;
+      color: #32cd32;
+    }
+
+    /* Main Content Styling */
+    .main-content {
+      flex: 1;
+      padding: 2rem;
+    }
+
+    /* Account Header */
+    .account-header {
+      text-align: right;
+      margin-bottom: 2rem;
+    }
+
+    .account-name {
+      background-color: #222;
+      padding: 0.8rem 1.5rem;
+      border-radius: 8px;
+    }
+
+    /* Balance Section */
+    .balance-section {
+      margin-bottom: 3rem;
+    }
+
+    .balance-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .amount {
+      font-size: 2rem;
+    }
+
+    .actions .btn {
+      background-color: #222;
+      color: #fff;
+      border: 1px solid #444;
+      border-radius: 8px;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      margin-left: 0.5rem;
+    }
+
+    .btn-green {
+      background-color: #32cd32;
+      color: #000;
+      border: none;
+    }
+
+    .actions .btn:hover {
+      opacity: 0.8;
+    }
+
+    .currencies {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .currency-card {
+      background-color: #222;
+      padding: 1rem;
+      border-radius: 8px;
+      flex: 1;
+      text-align: center;
+    }
+
+    .add-currency {
+      background-color: #333;
+      color: #888;
+      font-size: 1.5rem;
+      border-radius: 8px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 1rem;
+      cursor: pointer;
+    }
+
+    .add-currency:hover {
+      color: #fff;
+    }
+
+    /* Transactions Section */
+    .transactions-section {
+      margin-bottom: 3rem;
+    }
+
+    .transactions-section p {
+      opacity: 0.7;
+    }
+
+    .see-all {
+      color: #32cd32;
+      text-decoration: none;
+    }
+
+    .see-all:hover {
+      text-decoration: underline;
+    }
+
+    /* Transfer Calculator */
+    .transfer-calculator {
+      margin-bottom: 3rem;
+    }
+
+    .calculator {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .calculator input {
+      flex: 1;
+      padding: 0.8rem;
+      background-color: #222;
+      color: #fff;
+      border: 1px solid #333;
+      border-radius: 8px;
+    }
+
+    /* Content Pages */
+    .content-page {
+      display: none;
+    }
+
+    .content-page.active {
+      display: block;
+    }
+
+    /* Earn £50 Page Styling */
+    .earn-page {
+      background-color: #222;
+      padding: 2rem;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    .earn-title {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: #32cd32;
+    }
+
+    .earn-description {
+      font-size: 1rem;
+      color: #ccc;
+      margin-bottom: 2rem;
+    }
+
+    .earn-button {
+      background-color: #32cd32;
+      color: #000;
+      border: none;
+      padding: 1rem 2rem;
+      font-size: 1rem;
+      cursor: pointer;
+      border-radius: 8px;
+    }
+
+    .earn-button:hover {
+      background-color: #28a828;
+    }
+  </style>
+</head>
+<body>
+  <div class="dashboard">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="logo">WISE</div>
+      <nav class="nav-menu">
+        <ul>
+          <li class="nav-item active" data-route="home">
+            <span class="icon">🏠</span> Home
+          </li>
+          <li class="nav-item" data-route="card">
+            <span class="icon">💳</span> Card
+          </li>
+          <li class="nav-item" data-route="recipients">
+            <span class="icon">👥</span> Recipients
+          </li>
+          <li class="nav-item" data-route="payments">
+            <span class="icon">💸</span> Payments
+          </li>
+          <li class="nav-item" data-route="earn">
+            <span class="icon">🎁</span> Earn £50
+          </li>
+        </ul>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <header class="account-header">
+        <div class="account-name">Account Name</div>
+      </header>
+
+      <!-- Home Page -->
+      <div id="home" class="content-page active">
+        <h1>Welcome to the Home Page</h1>
+      </div>
+
+      <!-- Card Page -->
+      <div id="card" class="content-page">
+        <h1>This is the Card Page</h1>
+      </div>
+
+      <!-- Recipients Page -->
+      <div id="recipients" class="content-page">
+        <h1>This is the Recipients Page</h1>
+      </div>
+
+      <!-- Payments Page -->
+      <div id="payments" class="content-page">
+        <h1>This is the Payments Page</h1>
+      </div>
+
+      <!-- Earn £50 Page -->
+      <div id="earn" class="content-page">
+        <div class="earn-page">
+          <h2 class="earn-title">Earn £50 with Our Program!</h2>
+          <p class="earn-description">
+            Want to earn an easy £50? Follow the steps below to start earning:
+          </p>
+          <ol class="earn-steps">
+            <li>Sign up for our referral program.</li>
+            <li>Invite your friends to join.</li>
+            <li>Earn £50 for every successful referral!</li>
+          </ol>
+          <button class="earn-button" onclick="alert('You have earned £50!')">Start Earning Now</button>
+        </div>
+      </div>
+
+      <section class="balance-section">
+        <h2>Total balance</h2>
+        <div class="balance-info">
+          <span class="amount">0.00 SAR</span>
+          <div class="actions">
+            <button class="btn btn-green">Send</button>
+            <button class="btn">Add money</button>
+            <button class="btn">Request</button>
+          </div>
+        </div>
+
+        <div class="currencies">
+          <div class="currency-card">
+            <div class="flag">🇬🇧</div>
+            <div class="currency-details">
+              <h3>GBP</h3>
+              <p>0.00</p>
+            </div>
+          </div>
+          <div class="currency-card">
+            <div class="flag">🇺🇸</div>
+            <div class="currency-details">
+              <h3>USD</h3>
+              <p>0.00</p>
+            </div>
+          </div>
+          <div class="add-currency">+</div>
+        </div>
+      </section>
+
+      <section class="transactions-section">
+        <h2>Transactions</h2>
+        <p>No transactions yet</p>
+        <a href="#" class="see-all">See all</a>
+      </section>
+
+      <section class="transfer-calculator">
+        <h2>Transfer calculator</h2>
+        <p>1 GBP = 1.2586 USD</p>
+        <div class="calculator">
+          <input type="number" value="1000.00" />
+          <span>➡️</span>
+          <input type="text" value="1252.73" readonly />
+          <button class="btn btn-green">Send</button>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    // JavaScript for Sidebar Navigation
+    const navItems = document.querySelectorAll('.nav-item');
+    const contentPages = document.querySelectorAll('.content-page');
+
+    navItems.forEach(item => {
+      item.addEventListener('click', () => {
+        // Remove active class from all items and pages
+        navItems.forEach(i => i.classList.remove('active'));
+        contentPages.forEach(page => page.classList.remove('active'));
+
+        // Add active class to clicked item and corresponding page
+        item.classList.add('active');
+        const route = item.getAttribute('data-route');
+        document.getElementById(route).classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>

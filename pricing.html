@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pricing</title>
+  <style>
+    /* General Styling */
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #111;
+      color: #fff;
+      display: flex;
+      height: 100vh;
+    }
+
+    .dashboard {
+      display: flex;
+      width: 100%;
+    }
+
+    /* Sidebar Styling */
+    .sidebar {
+      width: 250px;
+      background-color: #1a1a1a;
+      padding: 1rem;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: #32cd32;
+      margin-bottom: 2rem;
+    }
+
+    .nav-menu ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      padding: 0.8rem 1rem;
+      margin-bottom: 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .nav-item .icon {
+      margin-right: 1rem;
+    }
+
+    .nav-item:hover {
+      background-color: #222;
+    }
+
+    .nav-item.active {
+      background-color: #222;
+      color: #32cd32;
+    }
+
+    /* Main Content Styling */
+    .main-content {
+      flex: 1;
+      padding: 2rem;
+    }
+
+    /* Account Header */
+    .account-header {
+      text-align: right;
+      margin-bottom: 2rem;
+    }
+
+    .account-name {
+      background-color: #222;
+      padding: 0.8rem 1.5rem;
+      border-radius: 8px;
+    }
+
+    /* Balance Section */
+    .balance-section {
+      margin-bottom: 3rem;
+    }
+
+    .balance-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .amount {
+      font-size: 2rem;
+    }
+
+    .actions .btn {
+      background-color: #222;
+      color: #fff;
+      border: 1px solid #444;
+      border-radius: 8px;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      margin-left: 0.5rem;
+    }
+
+    .btn-green {
+      background-color: #32cd32;
+      color: #000;
+      border: none;
+    }
+
+    .actions .btn:hover {
+      opacity: 0.8;
+    }
+
+    .currencies {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .currency-card {
+      background-color: #222;
+      padding: 1rem;
+      border-radius: 8px;
+      flex: 1;
+      text-align: center;
+    }
+
+    .add-currency {
+      background-color: #333;
+      color: #888;
+      font-size: 1.5rem;
+      border-radius: 8px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 1rem;
+      cursor: pointer;
+    }
+
+    .add-currency:hover {
+      color: #fff;
+    }
+
+    /* Transactions Section */
+    .transactions-section {
+      margin-bottom: 3rem;
+    }
+
+    .transactions-section p {
+      opacity: 0.7;
+    }
+
+    .see-all {
+      color: #32cd32;
+      text-decoration: none;
+    }
+
+    .see-all:hover {
+      text-decoration: underline;
+    }
+
+    /* Transfer Calculator */
+    .transfer-calculator {
+      margin-bottom: 3rem;
+    }
+
+    .calculator {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .calculator input {
+      flex: 1;
+      padding: 0.8rem;
+      background-color: #222;
+      color: #fff;
+      border: 1px solid #333;
+      border-radius: 8px;
+    }
+
+    /* Content Pages */
+    .content-page {
+      display: none;
+    }
+
+    .content-page.active {
+      display: block;
+    }
+    /* Earn £50 Page Specific Styles */
+#earn {
+  background-color: #222;
+  padding: 2rem;
+  border-radius: 8px;
+  text-align: center;
+}
+
+#earn h1 {
+  color: #32cd32;
+  margin-bottom: 1rem;
+}
+
+#earn p {
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+}
+
+.earn-details {
+  background-color: #333;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+}
+
+.earn-details p {
+  margin-bottom: 1rem;
+  color: #fff;
+}
+
+.earn-details ul {
+  list-style: disc;
+  padding-left: 1.5rem;
+  color: #ccc;
+}
+
+.cta-container {
+  margin-bottom: 1.5rem;
+}
+
+.cta-container button {
+  background-color: #32cd32;
+  color: #fff;
+  padding: 0.8rem 1.5rem;
+  font-size: 1.2rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.cta-container button:hover {
+  background-color: #28a728;
+}
+
+.note {
+  font-size: 0.9rem;
+  color: #bbb;
+}
+/* Payments Page Specific Styles */
+#payments {
+  background-color: #222;
+  padding: 2rem;
+  border-radius: 8px;
+  text-align: center;
+}
+
+#payments h1 {
+  color: #32cd32;
+  margin-bottom: 1.5rem;
+}
+
+section {
+  margin-bottom: 2rem;
+}
+
+h2 {
+  color: #fff;
+  margin-bottom: 1rem;
+}
+
+.payment-form {
+  background-color: #333;
+  padding: 1.5rem;
+  border-radius: 8px;
+  display: inline-block;
+  width: 100%;
+  max-width: 400px;
+  text-align: left;
+}
+
+.payment-form .form-group {
+  margin-bottom: 1.5rem;
+}
+
+.payment-form label {
+  display: block;
+  color: #fff;
+  margin-bottom: 0.5rem;
+}
+
+.payment-form input, .payment-form select {
+  width: 100%;
+  padding: 0.8rem;
+  background-color: #444;
+  border: 1px solid #555;
+  border-radius: 8px;
+  color: #fff;
+}
+
+.payment-form button {
+  background-color: #32cd32;
+  color: #fff;
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.payment-form button:hover {
+  background-color: #28a728;
+}
+
+.transactions-table {
+  width: 100%;
+  margin-top: 1rem;
+  border-collapse: collapse;
+}
+
+.transactions-table th, .transactions-table td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid #444;
+}
+
+.transactions-table th {
+  color: #32cd32;
+}
+
+.transactions-table td {
+  color: #fff;
+}
+
+.transactions-table tr:hover {
+  background-color: #333;
+}
+
+.see-all {
+  color: #32cd32;
+  text-decoration: none;
+  display: block;
+  margin-top: 1rem;
+}
+
+.see-all:hover {
+  text-decoration: underline;
+}
+
+.payment-methods {
+  background-color: #333;
+  padding: 1.5rem;
+  border-radius: 8px;
+  display: inline-block;
+  width: 100%;
+  max-width: 400px;
+  text-align: left;
+}
+
+.payment-methods .payment-method {
+  margin-bottom: 1.5rem;
+}
+
+.payment-methods button {
+  background-color: #222;
+  color: #fff;
+  border: 1px solid #444;
+  padding: 0.8rem 1.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.payment-methods button:hover {
+  opacity: 0.8;
+}
+/* Home Page Styling */
+#home h1, #card h1, #recipients h1 {
+  color: #32cd32;
+  margin-bottom: 1rem;
+}
+
+.account-overview, .recent-transactions, .quick-links, .recipients-list, .add-card, .add-recipient {
+  background-color: #222;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  border-radius: 8px;
+}
+
+h2 {
+  color: #fff;
+  margin-bottom: 1rem;
+}
+
+.balance-info, .transaction-amount, .transaction-date {
+  font-size: 1.2rem;
+}
+
+.links a {
+  color: #32cd32;
+  display: block;
+  margin: 0.5rem 0;
+  text-decoration: none;
+}
+
+.links a:hover {
+  text-decoration: underline;
+}
+
+.card-details .card-item {
+  background-color: #333;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.card-details .card-item button {
+  background-color: #32cd32;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+}
+
+.card-details .card-item button:hover {
+  background-color: #28a728;
+}
+
+.recipients-list ul {
+  list-style: none;
+  padding: 0;
+}
+
+.recipients-list li {
+  background-color: #333;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+  border-radius: 8px;
+}
+
+.recipients-list button {
+  background-color: #32cd32;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+}
+
+.recipients-list button:hover {
+  opacity: 0.8;
+}
+
+.recipient-form input, .card-form input {
+  width: 100%;
+  padding: 0.8rem;
+  background-color: #444;
+  border: 1px solid #555;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.recipient-form button, .card-form button {
+  background-color: #32cd32;
+  color: #fff;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.recipient-form button:hover, .card-form button:hover {
+  background-color: #28a728;
+}
+
+  </style>
+</head>
+<body>
+  <div class="dashboard">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="logo">LUNA</div>
+      <nav class="nav-menu">
+        <ul>
+            <a href="index.html" style="text-decoration: none;">
+          <li class="nav-item active" data-route="home">
+            <span class="icon">🏠</span> Home
+          </li></a>
+          <li class="nav-item" data-route="card">
+            <span class="icon">💳</span> Card
+          </li>
+          <li class="nav-item" data-route="recipients">
+            <span class="icon">👥</span> Recipients
+          </li>
+          <li class="nav-item" data-route="payments">
+            <span class="icon">💸</span> Payments
+          </li>
+          <li class="nav-item" data-route="earn">
+            <span class="icon">🎁</span> Earn £50
+          </li>
+        </ul>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <header class="account-header">
+        <div class="account-name">Account Name</div>
+      </header>
+
+      <!-- Home Page -->
+      <!-- Home Page -->
+<div id="home" class="content-page active">
+    <h1>Welcome to Your Dashboard</h1>
+    <p>Here’s an overview of your account, recent activities, and quick actions.</p>
+  
+    <!-- Account Balance Overview -->
+    <section class="account-overview">
+      <h2>Your Account Balance</h2>
+      <div class="balance-info">
+        <span class="amount">£500.00</span>
+        <div class="actions">
+          <button class="btn btn-green">View Transactions</button>
+          <button class="btn">Add Funds</button>
+        </div>
+      </div>
+    </section>
+  
+    <!-- Recent Transactions -->
+    <section class="recent-transactions">
+      <h2>Recent Transactions</h2>
+      <ul>
+        <li>
+          <span class="transaction-date">2024-11-25</span>
+          <span class="transaction-amount">-£30.00</span> 
+          <span class="transaction-description">Payment to John Doe</span>
+        </li>
+        <li>
+          <span class="transaction-date">2024-11-23</span>
+          <span class="transaction-amount">+£100.00</span> 
+          <span class="transaction-description">Deposit</span>
+        </li>
+      </ul>
+    </section>
+  
+    <!-- Quick Links -->
+    <section class="quick-links">
+      <h2>Quick Actions</h2>
+      <div class="links">
+        <a href="#">Add New Card</a>
+        <a href="#">View Payments</a>
+        <a href="#">Send Money</a>
+      </div>
+    </section>
+  </div>
+  
+  <!-- Card Page -->
+  <div id="card" class="content-page">
+    <h1>Manage Your Cards</h1>
+  
+    <!-- Card Overview -->
+    <section class="card-overview">
+      <h2>Your Active Cards</h2>
+      <div class="card-details">
+        <div class="card-item">
+          <span>🛡️ Virtual Card</span>
+          <button class="btn">View Details</button>
+          <button class="btn">Activate</button>
+        </div>
+        <div class="card-item">
+          <span>💳 Physical Card</span>
+          <button class="btn">View Details</button>
+          <button class="btn">Activate</button>
+        </div>
+      </div>
+    </section>
+  
+    <!-- Add New Card -->
+    <section class="add-card">
+      <h2>Add a New Card</h2>
+      <form class="card-form">
+        <input type="text" placeholder="Card Number" required />
+        <input type="text" placeholder="Card Holder's Name" required />
+        <input type="date" placeholder="Expiration Date" required />
+        <button class="btn btn-green">Add Card</button>
+      </form>
+    </section>
+  </div>
+  
+  <!-- Recipients Page -->
+  <div id="recipients" class="content-page">
+    <h1>Your Recipients</h1>
+    
+    <!-- List of Recipients -->
+    <section class="recipients-list">
+      <ul>
+        <li>
+          <span>John Doe</span>
+          <button class="btn">Send Money</button>
+          <button class="btn">Remove</button>
+        </li>
+        <li>
+          <span>Jane Smith</span>
+          <button class="btn">Send Money</button>
+          <button class="btn">Remove</button>
+        </li>
+        <li>
+          <span>Michael Ray</span>
+          <button class="btn">Send Money</button>
+          <button class="btn">Remove</button>
+        </li>
+      </ul>
+    </section>
+  
+    <!-- Add New Recipient -->
+    <section class="add-recipient">
+      <h2>Add a New Recipient</h2>
+      <form class="recipient-form">
+        <input type="text" placeholder="Recipient's Name" required />
+        <input type="email" placeholder="Recipient's Email" required />
+        <input type="tel" placeholder="Recipient's Phone Number" required />
+        <button class="btn btn-green">Add Recipient</button>
+      </form>
+    </section>
+  </div>
+  
+
+      <!-- Payments Page -->
+      <div id="payments" class="content-page">
+        <h1>Payments</h1>
+      
+        <section class="make-payment">
+          <h2>Make a Payment</h2>
+          <form class="payment-form">
+            <div class="form-group">
+              <label for="recipient">Recipient</label>
+              <input type="text" id="recipient" placeholder="Enter recipient name" required />
+            </div>
+            <div class="form-group">
+              <label for="amount">Amount</label>
+              <input type="number" id="amount" placeholder="Enter amount" required />
+            </div>
+            <div class="form-group">
+              <label for="currency">Currency</label>
+              <select id="currency">
+                <option value="GBP">GBP</option>
+                <option value="USD">USD</option>
+                <option value="EUR">EUR</option>
+              </select>
+            </div>
+            <button type="submit" class="btn btn-green">Send Payment</button>
+          </form>
+        </section>
+      
+        <section class="recent-transactions">
+          <h2>Recent Transactions</h2>
+          <table class="transactions-table">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Recipient</th>
+                <th>Amount</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>2024-11-20</td>
+                <td>John Doe</td>
+                <td>£50.00</td>
+                <td>Completed</td>
+              </tr>
+              <tr>
+                <td>2024-11-18</td>
+                <td>Jane Smith</td>
+                <td>€30.00</td>
+                <td>Pending</td>
+              </tr>
+              <tr>
+                <td>2024-11-17</td>
+                <td>Michael Ray</td>
+                <td>$100.00</td>
+                <td>Completed</td>
+              </tr>
+            </tbody>
+          </table>
+          <a href="#" class="see-all">See All Transactions</a>
+        </section>
+      
+        <section class="payment-methods">
+          <h2>Payment Methods</h2>
+          <div class="payment-method">
+            <p>💳 <strong>Visa</strong></p>
+            <button class="btn">Add New Card</button>
+          </div>
+          <div class="payment-method">
+            <p>💳 <strong>Mastercard</strong></p>
+            <button class="btn">Add New Card</button>
+          </div>
+          <div class="payment-method">
+            <p>💳 <strong>PayPal</strong></p>
+            <button class="btn">Link PayPal Account</button>
+          </div>
+        </section>
+      </div>
+      
+
+      <!-- Earn £50 Page -->
+      <div id="earn" class="content-page">
+        <h1>Earn £50</h1>
+        <p>Welcome to the "Earn £50" page. Follow these simple steps to earn £50:</p>
+        
+        <ol>
+          <li>Step 1: Complete the sign-up process.</li>
+          <li>Step 2: Invite your friends to join and complete their first transaction.</li>
+          <li>Step 3: Once your friend completes their first transaction, you will earn £50.</li>
+        </ol>
+      
+        <div class="earn-details">
+          <p><strong>Conditions:</strong></p>
+          <ul>
+            <li>Offer valid for new users only.</li>
+            <li>Referral rewards are credited after a successful transaction.</li>
+            <li>This offer is limited to one £50 reward per user.</li>
+          </ul>
+        </div>
+      
+        <div class="cta-container">
+          <button class="btn btn-green" onclick="claimReward()">Claim Your £50</button>
+        </div>
+      
+        <div class="note">
+          <p>*Terms and conditions apply. Offer may vary by location.</p>
+        </div>
+      </div>
+      
+      <script>
+        // Function to simulate claiming the reward
+        function claimReward() {
+          alert("Congratulations! You have claimed your £50 reward.");
+        }
+      </script>
+      
+
+      <section class="balance-section">
+        <h2>Total balance</h2>
+        <div class="balance-info">
+          <span class="amount">0.00 SAR</span>
+          <div class="actions">
+            <button class="btn btn-green">Send</button>
+            <button class="btn">Add money</button>
+            <button class="btn">Request</button>
+          </div>
+        </div>
+
+        <div class="currencies">
+          <div class="currency-card">
+            <div class="flag">🇬🇧</div>
+            <div class="currency-details">
+              <h3>GBP</h3>
+              <p>0.00</p>
+            </div>
+          </div>
+          <div class="currency-card">
+            <div class="flag">🇺🇸</div>
+            <div class="currency-details">
+              <h3>USD</h3>
+              <p>0.00</p>
+            </div>
+          </div>
+          <div class="add-currency">+</div>
+        </div>
+      </section>
+
+      <section class="transactions-section">
+        <h2>Transactions</h2>
+        <ul id="transactions-list">
+          <!-- List of transactions will go here -->
+        </ul>
+        <a href="#" id="see-all-link" class="see-all">See all</a>
+      </section>
+      <script>
+        // Sample transactions
+        const transactions = [
+          { date: '2024-11-25', amount: '-£30.00', description: 'Payment to John Doe' },
+          { date: '2024-11-23', amount: '+£100.00', description: 'Deposit' },
+          { date: '2024-11-20', amount: '-£50.00', description: 'Payment to Jane Smith' },
+          { date: '2024-11-18', amount: '+£200.00', description: 'Deposit' },
+          { date: '2024-11-15', amount: '-£70.00', description: 'Payment for services' },
+        ];
+        
+        // Display transactions in the list
+        function displayTransactions() {
+          const transactionList = document.getElementById('transactions-list');
+          transactionList.innerHTML = ''; // Clear any existing transactions
+        
+          // Limit to show the first 3 transactions initially
+          const transactionsToShow = isExpanded ? transactions : transactions.slice(0, 3);
+        
+          transactionsToShow.forEach(transaction => {
+            const listItem = document.createElement('li');
+            listItem.innerHTML = `
+              <span class="transaction-date">${transaction.date}</span>
+              <span class="transaction-amount">${transaction.amount}</span>
+              <span class="transaction-description">${transaction.description}</span>
+            `;
+            transactionList.appendChild(listItem);
+          });
+        }
+        
+        // Toggle between showing all or limited transactions
+        let isExpanded = false;
+        document.getElementById('see-all-link').addEventListener('click', function(event) {
+          event.preventDefault();
+          isExpanded = !isExpanded; // Toggle the flag
+          displayTransactions(); // Re-render the list based on the flag
+          this.textContent = isExpanded ? 'See less' : 'See all'; // Change link text
+        });
+        
+        // Initial render of transactions
+        displayTransactions();
+        </script>
+              
+
+      <section class="transfer-calculator">
+        <h2>Transfer Calculator</h2>
+        <p>1 GBP = 1.2586 USD</p>
+        <div class="calculator">
+          <input type="number" id="gbp-amount" value="1000.00" step="0.01" />
+          <span>➡️</span>
+          <input type="text" id="usd-amount" value="1252.73" readonly />
+          <button class="btn btn-green" id="send-btn">Send</button>
+        </div>
+      </section>
+      <script>
+        // Constants for the exchange rate
+        const exchangeRate = 1.2586;
+        
+        // Function to handle GBP to USD conversion
+        function updateUSDAmount() {
+          const gbpAmount = parseFloat(document.getElementById('gbp-amount').value);
+          if (!isNaN(gbpAmount)) {
+            const usdAmount = gbpAmount * exchangeRate;
+            document.getElementById('usd-amount').value = usdAmount.toFixed(2); // Update USD amount with two decimal places
+          }
+        }
+        
+        // Event listener for GBP input changes
+        document.getElementById('gbp-amount').addEventListener('input', updateUSDAmount);
+        
+        // Event listener for the "Send" button click
+        document.getElementById('send-btn').addEventListener('click', function() {
+          const gbpAmount = parseFloat(document.getElementById('gbp-amount').value);
+          const usdAmount = parseFloat(document.getElementById('usd-amount').value);
+        
+          if (isNaN(gbpAmount) || isNaN(usdAmount)) {
+            alert('Please enter a valid amount.');
+            return;
+          }
+        
+          alert(`You are sending £${gbpAmount.toFixed(2)} which is equivalent to $${usdAmount.toFixed(2)}.`);
+          // Add further logic for sending money here (e.g., sending the amount to a server, confirming the transfer)
+        });
+        </script>
+              
+    </main>
+  </div>
+
+  <script>
+    // Sidebar navigation functionality
+    const navItems = document.querySelectorAll('.nav-item');
+    const contentPages = document.querySelectorAll('.content-page');
+
+    navItems.forEach(item => {
+      item.addEventListener('click', () => {
+        // Remove active class from all items
+        navItems.forEach(nav => nav.classList.remove('active'));
+        // Add active class to clicked item
+        item.classList.add('active');
+
+        // Hide all content pages
+        contentPages.forEach(page => page.classList.remove('active'));
+        
+        // Show the content page that corresponds to the clicked item
+        const route = item.getAttribute('data-route');
+        document.getElementById(route).classList.add('active');
+      });
+    });
+    
+  </script>
+  <script>
+    // Function to handle "View Transactions" action
+    document.querySelector('.btn.btn-green').addEventListener('click', function() {
+      alert("View Transactions clicked");
+      // Ideally, you could open a modal or navigate to a transactions page
+      // For example:
+      // window.location.href = "/transactions";
+    });
+    
+    // Function to handle "Add Funds" action
+    document.querySelectorAll('.btn')[1].addEventListener('click', function() {
+      const amount = prompt("Enter amount to add:", "100");
+      if (amount && !isNaN(amount)) {
+        alert(`£${amount} has been added to your account.`);
+        // In a real scenario, you would update the account balance
+        document.querySelector('.amount').textContent = `£${parseFloat(amount) + 500.00}`; // Example to update balance
+      } else {
+        alert("Please enter a valid amount.");
+      }
+    });
+    
+    // Function to handle "Activate" card buttons
+    const activateButtons = document.querySelectorAll('.card-item button');
+    activateButtons.forEach(button => {
+      button.addEventListener('click', function() {
+        const cardType = this.previousElementSibling.textContent.trim();
+        alert(`${cardType} has been activated.`);
+        // In a real scenario, you could update the UI to reflect that the card is activated
+        this.textContent = "Activated"; // Changing button text to show activation status
+        this.disabled = true; // Disabling the button after activation
+      });
+    });
+    
+    // Function to handle "Send Money" for Recipients
+    const sendMoneyButtons = document.querySelectorAll('.recipients-list .btn:first-child');
+    sendMoneyButtons.forEach(button => {
+      button.addEventListener('click', function() {
+        const recipientName = this.parentElement.querySelector('span').textContent;
+        alert(`Sending money to ${recipientName}`);
+        // In a real scenario, you would trigger a form or redirect for the money transfer process
+      });
+    });
+    
+    // Function to handle "Remove" button for Recipients
+    const removeButtons = document.querySelectorAll('.recipients-list .btn:last-child');
+    removeButtons.forEach(button => {
+      button.addEventListener('click', function() {
+        const recipientName = this.parentElement.querySelector('span').textContent;
+        const confirmDelete = confirm(`Are you sure you want to remove ${recipientName} from your list?`);
+        if (confirmDelete) {
+          this.parentElement.remove(); // Remove the recipient from the list
+          alert(`${recipientName} has been removed.`);
+        }
+      });
+    });
+    
+    // Function to handle "Add Card" form submission
+    document.querySelector('.card-form button').addEventListener('click', function(e) {
+      e.preventDefault(); // Prevent the form from submitting the traditional way
+      const cardNumber = document.querySelector('.card-form input[type="text"]:first-child').value;
+      const cardHolderName = document.querySelector('.card-form input[type="text"]:nth-child(2)').value;
+      const expiryDate = document.querySelector('.card-form input[type="date"]').value;
+      
+      if (cardNumber && cardHolderName && expiryDate) {
+        alert(`Card added: ${cardHolderName}'s card ending in ${cardNumber.slice(-4)}`);
+        // In a real-world scenario, you would add the card to a list or backend system
+      } else {
+        alert("Please fill in all fields.");
+      }
+    });
+    
+    // Function to handle "Add Recipient" form submission
+    document.querySelector('.recipient-form button').addEventListener('click', function(e) {
+      e.preventDefault(); // Prevent the form from submitting traditionally
+      const recipientName = document.querySelector('.recipient-form input[type="text"]').value;
+      const recipientEmail = document.querySelector('.recipient-form input[type="email"]').value;
+      const recipientPhone = document.querySelector('.recipient-form input[type="tel"]').value;
+    
+      if (recipientName && recipientEmail && recipientPhone) {
+        alert(`Recipient added: ${recipientName}`);
+        // In a real-world scenario, you would add the recipient to a list or backend system
+        // For example:
+        const recipientList = document.querySelector('.recipients-list ul');
+        const newRecipient = document.createElement('li');
+        newRecipient.innerHTML = `<span>${recipientName}</span>
+                                   <button class="btn">Send Money</button>
+                                   <button class="btn">Remove</button>`;
+        recipientList.appendChild(newRecipient);
+      } else {
+        alert("Please fill in all fields.");
+      }
+    });
+    </script>
+    
+</body>
+</html>

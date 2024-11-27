@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sidebar Navigation</title>
+  <!-- <link rel="stylesheet" href="styles.css"> -->
+   <style>
+    /* General Styling */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #111;
+  color: #fff;
+}
+
+.dashboard {
+  display: flex;
+  height: 100vh;
+}
+
+/* Sidebar Styling */
+.sidebar {
+  width: 250px;
+  background-color: #1a1a1a;
+  padding: 1rem;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #32cd32;
+  margin-bottom: 2rem;
+}
+
+.nav-menu ul {
+  list-style: none;
+  padding: 0;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  padding: 0.8rem 1rem;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.nav-item .icon {
+  margin-right: 0.5rem;
+}
+
+.nav-item:hover {
+  background-color: #222;
+}
+
+.nav-item.active {
+  background-color: #222;
+  color: #32cd32;
+}
+
+/* Main Content Styling */
+.main-content {
+  flex: 1;
+  padding: 2rem;
+}
+
+.content-page {
+  display: none;
+}
+
+.content-page.active {
+  display: block;
+}
+
+
+   </style>
+</head>
+<body>
+  <div class="dashboard">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="logo">WISE</div>
+      <nav class="nav-menu">
+        <ul>
+          <li class="nav-item" data-route="home">
+            <span class="icon">🏠</span> Home
+          </li>
+          <li class="nav-item" data-route="card">
+            <span class="icon">💳</span> Card
+          </li>
+          <li class="nav-item" data-route="recipients">
+            <span class="icon">👥</span> Recipients
+          </li>
+          <li class="nav-item" data-route="payments">
+            <span class="icon">💸</span> Payments
+          </li>
+          <li class="nav-item" data-route="earn">
+            <span class="icon">🎁</span> Earn £50
+          </li>
+        </ul>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <div id="home" class="content-page active">
+        <h1>Welcome to the Home Page</h1>
+      </div>
+      <div id="card" class="content-page">
+        <h1>This is the Card Page</h1>
+      </div>
+      <div id="recipients" class="content-page">
+        <h1>This is the Recipients Page</h1>
+      </div>
+      <div id="payments" class="content-page">
+        <h1>This is the Payments Page</h1>
+      </div>
+      <div id="earn" class="content-page">
+        <h1>Earn £50 Page</h1>
+      </div>
+    </main>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
