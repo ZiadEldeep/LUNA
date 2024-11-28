@@ -3,81 +3,157 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login - Secure Access</title>
-  <link rel="stylesheet" href="styles.css">
+  <title>Login Page</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #111;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      text-align: center;
+      max-width: 400px;
+      width: 100%;
+    }
+
+    .notification {
+      background-color: #333;
+      color: #aaa;
+      padding: 12px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      display: flex;
+      justify-content: start;
+      align-items: center;
+    }
+
+    .notification .icon {
+      width: 20px;
+      height: 20px;
+      margin-right: 8px;
+    }
+
+    .login-box {
+      background-color: #1a1a1a;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    h2 {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    .new-user {
+      margin-bottom: 20px;
+    }
+
+    .new-user a {
+      color: #8fdb76;
+      text-decoration: none;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border-radius: 5px;
+      border: 1px solid #333;
+      background-color: #222;
+      color: white;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: #8fdb76;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #7ab462;
+    }
+
+    .trouble-login {
+      margin-top: 10px;
+      font-size: 14px;
+    }
+
+    .trouble-login a {
+      color: #8fdb76;
+      text-decoration: none;
+    }
+  </style>
 </head>
 <body>
-  <header class="navbar">
-    <div class="logo">LUNA</div>
-    <nav>
-      <ul class="nav-links">
-        <li><a href="#">Pricing</a></li>
-        <li><a href="#">Help</a></li>
-        <li><a href="register.html">Register</a></li>
-      </ul>
-    </nav>
-  </header>
-
-  <main class="login-section">
-    <div class="login-container">
-      <h1>Welcome Back</h1>
-      <p>Log in to your account to continue</p>
-      <form id="login-form" class="login-form" action="#" method="POST" style="max-width: 400px; margin: 0 auto; padding: 20px; border: 1px solid #ccc; border-radius: 8px; background-color: #ffffff;">
-        <div class="form-group" style="margin-bottom: 15px;">
-          <label for="email" style="display: block; font-weight: bold; margin-bottom: 5px; color: #333;">Email Address</label>
-          <input type="email" id="email" name="email" placeholder="Enter your email" required 
-                 style="width: 100%; padding: 10px; font-size: 16px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; background-color: #f9f9f9; color: #333;">
-        </div>
-        <div class="form-group" style="margin-bottom: 15px;">
-          <label for="password" style="display: block; font-weight: bold; margin-bottom: 5px; color: #333;">Password</label>
-          <input type="password" id="password" name="password" placeholder="Enter your password" required 
-                 style="width: 100%; padding: 10px; font-size: 16px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; background-color: #f9f9f9; color: #333;">
-        </div>
-        <button type="submit" class="cta-button" 
-                style="background-color: #4CAF50; color: white; padding: 12px 20px; font-size: 16px; border: none; border-radius: 4px; cursor: pointer; width: 100%; margin-top: 10px;">
-          Log In
-        </button>
-        <p style="text-align: center; margin-top: 15px; color: #666;">
-          Don't have an account? <a href="signup.html" class="link" style="color: #4CAF50; text-decoration: none;">Register here</a>.
-        </p>
-      </form>
-      
-      <p class="login-footer">
-        Don't have an account? <a href="signup.html" class="link">Register here</a>.
-      </p>
+  <div class="container">
+    <!-- Notification -->
+    <div class="notification">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 20 20" fill="currentColor">
+        <path fill-rule="evenodd" d="M18 8a6 6 0 11-12 0 6 6 0 0112 0z" />
+      </svg>
+      <p>We logged you out because you were inactive for 5 minutes — it's to help keep your account secure.</p>
     </div>
-  </main>
+
+    <div class="login-box">
+      <h2>Welcome back.</h2>
+      <p class="new-user">New to Wise? <a href="#">Sign up</a></p>
+
+      <!-- Login Form -->
+      <form id="loginForm">
+        <input type="email" id="email" name="email" placeholder="Your email address" required />
+        <input type="password" id="password" name="password" placeholder="Your password" required />
+        <button type="submit">Log in</button>
+      </form>
+
+      <p class="trouble-login">Trouble logging in?</p>
+    </div>
+  </div>
 
   <script>
-    // Add event listener for the login form
-    document.getElementById("login-form").addEventListener("submit", function(event) {
-      event.preventDefault(); // Prevent form from submitting normally
-
-      // Get the input values (email and password)
-      const enteredEmail = document.getElementById("email").value;
-      const enteredPassword = document.getElementById("password").value;
-
-      // Retrieve stored user data from localStorage
-      const storedUser = JSON.parse(localStorage.getItem("user"));
-
-      // Check if the user data exists in localStorage
-      if (storedUser) {
-        // Compare entered email and password with the stored ones
-        if (enteredEmail === storedUser.email && enteredPassword === storedUser.password) {
-          // If credentials match, show success (you can redirect to dashboard or homepage)
-          alert("Login successful!");
-          window.location.href = "home.html"; // Redirect to dashboard page (or any other page)
-        } else {
-          // If credentials do not match, show an error message
-          alert("Invalid email or password. Please try again.");
-        }
-      } else {
-        // If no user is found in localStorage
-        alert("No user found. Please register first.");
+    // Check if email and password are stored in localStorage
+    window.onload = function() {
+      const storedEmail = localStorage.getItem('email');
+      const storedPassword = localStorage.getItem('password');
+      
+      // If values exist, autofill the login fields
+      if (storedEmail && storedPassword) {
+        document.getElementById('email').value = storedEmail;
+        document.getElementById('password').value = storedPassword;
       }
+    }
+
+    // Handle form submission
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+
+      // Save to localStorage when logging in
+      localStorage.setItem('email', email);
+      localStorage.setItem('password', password);
+
+      // For now, just an alert to confirm
+      alert(`Logged in with email: ${email}`);
+      
+      // Add real login logic here (e.g., authentication with a server)
     });
   </script>
-
-  <script src="script.js"></script>
 </body>
 </html>
