@@ -112,7 +112,7 @@
 
     <div class="login-box">
       <h2>Welcome back.</h2>
-      <p class="new-user">New to Wise? <a href="#">Sign up</a></p>
+      <p class="new-user">New to Wise? <a href="signup.html">Sign up</a></p>
 
       <!-- Login Form -->
       <form id="loginForm">
@@ -126,33 +126,46 @@
   </div>
 
   <script>
-    // Check if email and password are stored in localStorage
+    // Check if the user is already logged in on page load
     window.onload = function() {
-      const storedEmail = localStorage.getItem('email');
-      const storedPassword = localStorage.getItem('password');
-      
-      // If values exist, autofill the login fields
-      if (storedEmail && storedPassword) {
-        document.getElementById('email').value = storedEmail;
-        document.getElementById('password').value = storedPassword;
+      const storedUser = JSON.parse(localStorage.getItem('userData'));
+
+      // If user is logged in, redirect them to h.html
+      if (storedUser) {
+        window.location.href = 'h.html'; // Redirect to h.html if user is found in localStorage
       }
-    }
+    };
 
     // Handle form submission
     document.getElementById('loginForm').addEventListener('submit', function(e) {
       e.preventDefault();
-      
-      const email = document.getElementById('email').value;
-      const password = document.getElementById('password').value;
 
-      // Save to localStorage when logging in
-      localStorage.setItem('email', email);
-      localStorage.setItem('password', password);
+      // Retrieve form elements
+      const emailInput = document.getElementById('email');
+      const passwordInput = document.getElementById('password');
 
-      // For now, just an alert to confirm
-      alert(`Logged in with email: ${email}`);
-      
-      // Add real login logic here (e.g., authentication with a server)
+      // Ensure the input elements are available and have values
+      if (!emailInput || !passwordInput) {
+        alert('Email or password input field is missing.');
+        return;
+      }
+
+      const email = emailInput.value;
+      const password = passwordInput.value;
+
+      // Retrieve stored user data from localStorage
+      const storedUser = JSON.parse(localStorage.getItem('userData'));
+
+      // Check if user data exists in localStorage and if the credentials match
+      if (storedUser && storedUser.email === email && storedUser.password === password) {
+        alert(`Logged in successfully with email: ${email}`);
+        
+        // Redirect to h.html upon successful login
+        window.location.href = 'home.html'; // Change 'h.html' to your desired page
+      } else {
+        window.location.href = 'home.html'; // Change 'h.html' to your desired page
+        // alert('Invalid credentials. Please try again.');
+      }
     });
   </script>
 </body>
